@@ -1,0 +1,16 @@
+{
+  "name": "store",
+  "description": "File system storage and retrieval of objects as JSON"
+  "version": "0.0.1",
+  "dependencies": {
+    "async": ">= 0.1.x",
+    "node-uuid": ">= 0.0.x"
+  },
+  "devDependencies": {
+    "temp":">= 0.4.x",
+    "mocha": ">= 0.0.x",
+    "chai": ">= 0.0.x"
+  },
+  "main": "index",
+  "engines": { "node": "=0.4.12" }
+}
