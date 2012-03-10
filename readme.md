@@ -8,7 +8,7 @@ The store module is a function that takes a single parameter: the path to the lo
 var store = require('store')('/path/to/storage/location');
 ```
 
-### Storing an object
+### Adding an object
 
 A stored object must have an `id` attribute (one will be provided if it does not). The object
 will be serialized to JSON using `JSON.stringify` and written to the storage location. 
@@ -23,7 +23,7 @@ var donkey = {
   color: 'brown'
 };
 
-store.save(donkey, function(err) {
+store.add(donkey, function(err) {
   // called when the file has been written
   // to the /path/to/storeage/location/12345.json
   if (err) throw err; // err if the save failed
