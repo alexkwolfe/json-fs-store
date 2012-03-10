@@ -34,7 +34,7 @@ module.exports = function(dir) {
     
     // store an object to file
     
-    save: function(obj, cb) {
+    add: function(obj, cb) {
       var json;
       try {
         json = JSON.stringify(obj, null, 2);

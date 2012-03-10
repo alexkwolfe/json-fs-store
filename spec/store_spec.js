@@ -36,7 +36,7 @@ describe("Store", function() {
 
   it('should save object', function(done) {
     var obj = { id: 'donkey', name: 'burro' };
-    store.save(obj, function(err) {
+    store.add(obj, function(err) {
       assert.ok(!err);
 
       var file = path.join(dir, 'donkey.json');
@@ -57,13 +57,13 @@ describe("Store", function() {
   });
 
   it('should list objects', function(done) {
-    var saves = [1, 2, 3].map(function(i) {
+    var adds = [1, 2, 3].map(function(i) {
       return function(cb) {
-        store.save({ id: i, name: "OBJ" + i }, cb);
+        store.add({ id: i, name: "OBJ" + i }, cb);
       };
     });
 
-    async.parallel(saves, function() {
+    async.parallel(adds, function() {
       store.list(function(err, entries) {
         assert.isNull(err);
         assert.equal(entries.length, 3);
@@ -78,7 +78,7 @@ describe("Store", function() {
   it('should remove object', function(done) {
     var obj = { id: 'donkey', name: 'burro' };
     var file = path.join(store.dir, obj.id + '.json');
-    store.save(obj, function(err) {
+    store.add(obj, function(err) {
       assert.ok(!err, 'error on save: ' + err);
       assert.isTrue(path.existsSync(file), 'create file');
       store.remove(obj, function(err) {
@@ -88,5 +88,5 @@ describe("Store", function() {
       })
     });
   });
-  
+
 });
