@@ -1,7 +1,8 @@
 var async = require('async'),
     fs = require('fs'),
     path = require('path'),
-    uuid = require('node-uuid');
+    uuid = require('node-uuid'),
+    mkdirp = require('mkdirp');
     
 module.exports = function(dir) {
   dir = dir || path.join(process.cwd(), 'store');
@@ -16,53 +17,68 @@ module.exports = function(dir) {
     
     list: function(cb) {
       var self = this;
-      readdir(dir, function(err, files) {
+      var action = function(err) {
         if (err) return cb(err);
-        files = files.filter(function(f) { return f.substr(-5) === ".json"; });
-        var fileLoaders = files.map(function(f) {
-          return function(cb) {
-            loadFile(f, cb);
-          };
-        });
-        async.parallel(fileLoaders, function(err, objs) {
+        readdir(dir, function(err, files) {
           if (err) return cb(err);
-          sort(objs, cb);
-        });
-      });
+          files = files.filter(function(f) { return f.substr(-5) === ".json"; });
+          var fileLoaders = files.map(function(f) {
+            return function(cb) {
+              loadFile(f, cb);
+            };
+          });
+          async.parallel(fileLoaders, function(err, objs) {
+            if (err) return cb(err);
+            sort(objs, cb);
+          });
+        })
+      };
+      mkdirp(dir, action);
     },
     
     
     // store an object to file
     
     add: function(obj, cb) {
-      var json;
-      try {
-        json = JSON.stringify(obj, null, 2);
-      }
-      catch (e) {
-        return cb(e);
-      }
-      obj.id = obj.id || uuid.v4();
-      fs.writeFile(path.join(dir, obj.id + '.json'), json, 'utf8', function(err) {
+      var action = function(err) {
         if (err) return cb(err);
-        cb();
-      });
+        var json;
+        try {
+          json = JSON.stringify(obj, null, 2);
+        }
+        catch (e) {
+          return cb(e);
+        }
+        obj.id = obj.id || uuid.v4();
+        fs.writeFile(path.join(dir, obj.id + '.json'), json, 'utf8', function(err) {
+          if (err) return cb(err);
+          cb();
+        });
+      };
+      mkdirp(dir, action);
     },
     
     
     // delete an object's file
     
     remove: function(obj, cb) {
-      fs.unlink(path.join(dir, obj.id + '.json'), function(err) {
-        cb(err);
-      })
+      var action = function(err) {
+        if (err) return cb(err);
+        fs.unlink(path.join(dir, obj.id + '.json'), function(err) {
+          cb(err);
+        });
+      }
+      mkdirp(dir, action);
     },
     
     
     // load an object from file
     
     load: function(id, cb) {
-      loadFile(path.join(dir, id + '.json'), cb);
+      mkdirp(dir, function(err) {
+        if (err) return cb(err);
+        loadFile(path.join(dir, id + '.json'), cb);
+      })
     }
     
   }
@@ -81,12 +97,12 @@ var readdir = function(dir, cb) {
     
 var loadFile = function(f, cb) {
   fs.readFile(f, 'utf8', function(err, code) {
-    if (err) return cb(err);
+    if (err) return cb("error loading file" + err);
     try {
       cb(null, JSON.parse(code));
     }
     catch (e) {
-      cb(e);
+      cb("Error parsing " + f + ": " + e);
     }
   });
 };
