@@ -30,6 +30,19 @@ store.add(donkey, function(err) {
 });
 ```
 
+### Retrieving an object
+
+To retrieve an object, you must know its `id` attribute and use it as a parameter for the `load` function.
+
+```javascript
+store.load('12345', function(err, loaded_donkey){
+  if(err) throw err; // err if JSON parsing failed
+
+  // do something with loaded_donkey here
+
+});
+```
+
 ### Listing stored objects
 
 Every call to the `#list` function reads the file system and returns the objects stored in the directory you specified when you created your store.
