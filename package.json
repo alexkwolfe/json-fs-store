@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "dependencies": {
     "async": ">= 0.1.x",
+    "graceful-fs": "latest",
     "node-uuid": ">= 0.0.x",
     "mkdirp": ">= 0.3.3"
   },
