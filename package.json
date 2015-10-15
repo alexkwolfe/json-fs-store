@@ -3,14 +3,14 @@
   "description": "File system storage and retrieval of objects as JSON",
   "version": "0.0.1",
   "dependencies": {
-    "async": ">= 0.1.x",
-    "node-uuid": ">= 0.0.x",
-    "mkdirp": ">= 0.3.3"
+    "async": "^1.4.2",
+    "node-uuid": "^1.4.3",
+    "mkdirp": "^0.5.1"
   },
   "devDependencies": {
-    "temp":">= 0.4.x",
-    "mocha": ">= 0.0.x",
-    "chai": ">= 0.0.x"
+    "temp":"^0.8.3",
+    "mocha": "^2.3.3",
+    "chai": "^3.3.0"
   },
   "main": "index",
   "engines": { "node": ">=0.4.12" }

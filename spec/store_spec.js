@@ -40,7 +40,7 @@ describe("Store", function() {
       assert.ok(!err);
 
       var file = path.join(dir, 'donkey.json');
-      assert.isTrue(path.existsSync(file));
+      assert.isTrue(fs.existsSync(file));
 
       fs.readFile(file, 'utf8', function(err, content)  {
         assert.isNull(err);
@@ -80,10 +80,10 @@ describe("Store", function() {
     var file = path.join(store.dir, obj.id + '.json');
     store.add(obj, function(err) {
       assert.ok(!err, 'error on save: ' + err);
-      assert.isTrue(path.existsSync(file), 'create file');
+      assert.isTrue(fs.existsSync(file), 'create file');
       store.remove(obj, function(err) {
         assert.ok(!err, 'error on remove: ' + err);
-        assert.isFalse(path.existsSync(file), 'remove file');
+        assert.isFalse(fs.existsSync(file), 'remove file');
         done();
       })
     });
