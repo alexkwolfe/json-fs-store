@@ -3,6 +3,12 @@ This Node.js npm module simply serializes JavaScript objects to JSON files into 
 [![Build Status](https://travis-ci.org/alexkwolfe/json-fs-store.svg?branch=master)](https://travis-ci.org/alexkwolfe/json-fs-store)
 [![Dependencies](https://david-dm.org/alexkwolfe/json-fs-store.svg?branch=master)](https://david-dm.org/alexkwolfe/json-fs-store)
 
+### Installing
+
+```
+npm install json-fs-store
+```
+
 ### Creating a store
 
 The store module is a function that takes a single parameter: the path to the location on the file system where you want to store your objects. If you omit the storage location the 'store' directory in your current working directory will be used.
@@ -28,27 +34,27 @@ var donkey = {
 
 store.add(donkey, function(err) {
   // called when the file has been written
-  // to the /path/to/storeage/location/12345.json
+  // to the /path/to/storage/location/12345.json
   if (err) throw err; // err if the save failed
 });
 ```
 
 ### Retrieving an object
 
-To retrieve an object, you must know its `id` attribute and use it as a parameter for the `load` function.
+To retrieve an object, you must know its `id` attribute and use it as a parameter for the `load()` function.
 
 ```javascript
-store.load('12345', function(err, loaded_donkey){
+store.load('12345', function(err, object){
   if(err) throw err; // err if JSON parsing failed
 
-  // do something with loaded_donkey here
+  // do something with object here
 
 });
 ```
 
 ### Listing stored objects
 
-Every call to the `#list` function reads the file system and returns the objects stored in the directory you specified when you created your store.
+Every call to the `list()` function reads the file system and returns the objects stored in the directory you specified when you created your store.
 Objects will be sorted according to their `name` attribute, if defined.
 
 ```javascript
@@ -62,7 +68,7 @@ store.list(function(err, objects) {
 
 ### Removing stored objects
 
-A stored object may be removed simply by passing the object to the `#remove` function.
+A stored object may be removed simply by passing the object to the `remove()` function.
 The object's `id` attribute will be used to remove the object's file from the file system.
 
 ```javascript
