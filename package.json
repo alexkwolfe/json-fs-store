@@ -13,5 +13,8 @@
     "chai": "^3.3.0"
   },
   "main": "index",
-  "engines": { "node": ">=0.4.12" }
+  "engines": { "node": ">=0.4.12" },
+  "scripts": {
+    "test": "mocha spec/*"
+  }
 }
