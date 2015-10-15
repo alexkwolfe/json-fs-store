@@ -5,7 +5,7 @@ This Node.js npm module simply serializes JavaScript objects to JSON files into 
 The store module is a function that takes a single parameter: the path to the location on the file system where you want to store your objects. If you omit the storage location the 'store' directory in your current working directory will be used.
 
 ```javascript
-var store = require('store')('/path/to/storage/location');
+var store = require('json-store')('/path/to/storage/location');
 ```
 
 ### Adding an object

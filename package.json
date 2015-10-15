@@ -1,5 +1,5 @@
 {
-  "name": "store",
+  "name": "json-store",
   "description": "File system storage and retrieval of objects as JSON",
   "version": "0.0.1",
   "dependencies": {
