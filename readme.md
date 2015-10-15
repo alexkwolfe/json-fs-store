@@ -1,5 +1,7 @@
 This Node.js npm module simply serializes JavaScript objects to JSON files into the file system directory of your choosing.
 
+[![Build Status](https://travis-ci.org/alexkwolfe/json-fs-store.svg?branch=master)](https://travis-ci.org/alexkwolfe/json-fs-store)
+
 ### Creating a store
 
 The store module is a function that takes a single parameter: the path to the location on the file system where you want to store your objects. If you omit the storage location the 'store' directory in your current working directory will be used.
