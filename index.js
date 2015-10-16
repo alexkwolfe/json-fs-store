@@ -1,5 +1,5 @@
 var async = require('async'),
-    fs = require('fs'),
+    fs = require('graceful-fs'),
     path = require('path'),
     uuid = require('node-uuid'),
     mkdirp = require('mkdirp');
