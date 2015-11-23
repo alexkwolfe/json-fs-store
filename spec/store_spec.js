@@ -81,7 +81,7 @@ describe("Store", function() {
     store.add(obj, function(err) {
       assert.ok(!err, 'error on save: ' + err);
       assert.isTrue(fs.existsSync(file), 'create file');
-      store.remove(obj, function(err) {
+      store.remove(obj.id, function(err) {
         assert.ok(!err, 'error on remove: ' + err);
         assert.isFalse(fs.existsSync(file), 'remove file');
         done();
