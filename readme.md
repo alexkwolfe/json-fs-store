@@ -68,11 +68,11 @@ store.list(function(err, objects) {
 
 ### Removing stored objects
 
-A stored object may be removed simply by passing the object to the `remove()` function.
-The object's `id` attribute will be used to remove the object's file from the file system.
+A stored object may be removed simply by passing the object's `id` attribute to the `remove()` function.
+The attribute will be used to remove the object's file from the file system.
 
 ```javascript
-store.remove(donkey, function(err) {
+store.remove('12345', function(err) {
   // called after the file has been removed
   if (err) throw err; // err if the file removal failed
 });

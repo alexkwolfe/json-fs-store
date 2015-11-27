@@ -61,10 +61,10 @@ module.exports = function(dir) {
     
     // delete an object's file
     
-    remove: function(obj, cb) {
+    remove: function(id, cb) {
       var action = function(err) {
         if (err) return cb(err);
-        fs.unlink(path.join(dir, obj.id + '.json'), function(err) {
+        fs.unlink(path.join(dir, id + '.json'), function(err) {
           cb(err);
         });
       }
