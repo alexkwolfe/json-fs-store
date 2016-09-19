@@ -3,18 +3,18 @@ var async = require('async'),
     path = require('path'),
     uuid = require('node-uuid'),
     mkdirp = require('mkdirp');
-    
+
 module.exports = function(dir) {
   dir = dir || path.join(process.cwd(), 'store');
-  
+
   return {
 
     // store in this directory
-    
+
     dir: dir,
-    
+
     // list all stored objects by reading the file system
-    
+
     list: function(cb) {
       var self = this;
       var action = function(err) {
@@ -35,10 +35,10 @@ module.exports = function(dir) {
       };
       mkdirp(dir, action);
     },
-    
-    
+
+
     // store an object to file
-    
+
     add: function(obj, cb) {
       var action = function(err) {
         if (err) return cb(err);
@@ -57,10 +57,10 @@ module.exports = function(dir) {
       };
       mkdirp(dir, action);
     },
-    
-    
+
+
     // delete an object's file
-    
+
     remove: function(id, cb) {
       var action = function(err) {
         if (err) return cb(err);
@@ -70,17 +70,17 @@ module.exports = function(dir) {
       }
       mkdirp(dir, action);
     },
-    
-    
+
+
     // load an object from file
-    
+
     load: function(id, cb) {
       mkdirp(dir, function(err) {
         if (err) return cb(err);
         loadFile(path.join(dir, id + '.json'), cb);
       })
     }
-    
+
   }
 };
 
@@ -94,19 +94,20 @@ var readdir = function(dir, cb) {
   });
 };
 
-    
+
 var loadFile = function(f, cb) {
   fs.readFile(f, 'utf8', function(err, code) {
     if (err) return cb("error loading file" + err);
     try {
-      cb(null, JSON.parse(code));
+      var jsonObj = JSON.parse(code);
     }
     catch (e) {
       cb("Error parsing " + f + ": " + e);
     }
+    cb(null, jsonObj);
   });
 };
-    
+
 var sort = function(objs, cb) {
   async.sortBy(objs, function(obj, cb) {
     cb(null, obj.name || '');
