@@ -1,7 +1,7 @@
 var async = require('async'),
     fs = require('graceful-fs'),
     path = require('path'),
-    uuid = require('node-uuid'),
+    uuid = require('uuid'),
     mkdirp = require('mkdirp');
 
 module.exports = function(dir) {
