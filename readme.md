@@ -14,7 +14,7 @@ npm install json-fs-store
 The store module is a function that takes a single parameter: the path to the location on the file system where you want to store your objects. 
 
 ```javascript
-var store = require('json-fs-store')('/path/to/storage/location');
+var store = require('json-fs-store')('./path/to/storage/location');
 ```
 
 If you omit the storage location the 'store' directory in your current working directory will be used.
